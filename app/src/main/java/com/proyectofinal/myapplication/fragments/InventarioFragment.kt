@@ -44,9 +44,9 @@ class InventarioFragment : Fragment() {
             val id = when(item.itemId) {
 
                 R.id.action_logout -> {
-                  //  FirebaseAuth.getInstance().signOut()
-                    val action3to1= InventarioFragmentDirections.actionInventarioFragmentToLogInFragment()
-                    v.findNavController().navigate(action3to1)
+                    FirebaseAuth.getInstance().signOut()
+                    val action1to3= InventarioFragmentDirections.actionInventarioFragmentToStartUpFragment()
+                    v.findNavController().navigate(action1to3)
 
                 }
 

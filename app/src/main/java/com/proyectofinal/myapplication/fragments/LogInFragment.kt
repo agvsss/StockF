@@ -41,8 +41,8 @@ class LogInFragment : Fragment() {
         super.onStart()
         if(auth.currentUser==null)  
         {
-            val action3to1= LogInFragmentDirections.actionLogInFragmentToInventarioFragment()
-            v.findNavController().navigate(action3to1)
+            val directions = LogInFragmentDirections.actionLogInFragmentToInventarioFragment()
+            v.findNavController().navigate(directions)
         }
         else
         {

@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_inventarioFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_inventarioFragment_to_startUpFragment"
+            app:destination="@id/startUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/addProductFragment"
