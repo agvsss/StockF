@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/add"
+        android:title="añadir"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_configuracion"
+        android:icon="@drawable/configuracion"
+        android:title="configuracion"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/logout"
+        android:title="logout"
+        app:showAsAction="always" />
+
+</menu>

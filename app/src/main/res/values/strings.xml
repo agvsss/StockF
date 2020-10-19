@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FreezX</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="registrarse">REGISTRARSE</string>
+    <string name="iniciar_sesi_n">INICIAR SESIÓN</string>
+    <string name="username_name">agustin123@gmail.com</string>
+    <string name="has_olvidado_la_contrase_a">Has olvidado la contraseña?</string>
+</resources>
