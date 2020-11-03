@@ -8,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.proyectofinal.myapplication.R
+import com.proyectofinal.myapplication.objetos.Usuario
 import org.w3c.dom.Text
 
 
@@ -35,17 +37,15 @@ class   SignUpFragment : Fragment() {
         editTextEmail = v.findViewById(R.id.newEmailInput)
         editTextName = v.findViewById(R.id.newUserNameInput)
         editTextPassword = v.findViewById(R.id.newPasswordInput)
+
+        auth = FirebaseAuth.getInstance()
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
-        auth = FirebaseAuth.getInstance()
-        if (auth.currentUser == null) {
-            signUpButton()
-        } else {
-            //TODO: IR A LA PANTALLA PRINCIPAL DE LA APP
-        }
+        signUpButton()
     }
 
     private fun signUpButton() {
@@ -58,40 +58,19 @@ class   SignUpFragment : Fragment() {
                 auth.createUserWithEmailAndPassword(emailStr, passStr)
                     .addOnCompleteListener(requireActivity()) { task ->
                         if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success")
-                            val user = auth?.currentUser
-                            val userMap = hashMapOf(
-                                "name" to nameStr, "email" to emailStr
-                            )
-                            user?.uid?.let { it1 ->
-                                db.collection("users").document(it1)
-                                    .set(userMap)
-                                    .addOnSuccessListener { documentReference ->
-                                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference}")
-                                    }
-                                    .addOnFailureListener { e ->
-                                        Log.w(TAG, "Error adding document", e)
-                                    }
-                            }
-                            db.collection("users")
-                                .get()
-                                .addOnSuccessListener { result ->
-                                    for (document in result) {
-                                        Log.d(TAG, "${document.id} => ${document.data}")
-                                    }
-                                }
-                                .addOnFailureListener { exception ->
-                                    Log.w(TAG, "Error getting documents.", exception)
-                                }
-                        } else {
+                            var usuario = Usuario(nameStr,emailStr,"",ArrayList())
+                            db.collection("users").document(usuario.email).set(usuario)
+
+                            val action3to1= SignUpFragmentDirections.actionSignUpFragmentToInventarioFragment()
+                            v.findNavController().navigate(action3to1)
+                        }
+                        else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
                             Snackbar
                                 .make(v, "No se pudo crear tu usuario", Snackbar.LENGTH_SHORT)
                                 .show()
                         }
-
                     }
             } else {
                 Log.w(TAG, "createUserWithEmail:NoConfirmaRegistro")
@@ -101,5 +80,4 @@ class   SignUpFragment : Fragment() {
             }
         }
     }
-
 }
